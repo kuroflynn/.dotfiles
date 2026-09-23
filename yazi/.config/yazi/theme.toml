@@ -1,2 +1,17 @@
 [flavor]
 dark = "synthwave84"
+
+[icon]
+prepend_dirs = [
+    { name = "Documentos", text = "󰈙" },
+    { name = "Imágenes",   text = "󰉏" },
+    { name = "Plantillas", text = "󰗴" },
+    { name = "Escritorio", text = "󰟀" },
+    { name = "Descargas",  text = "󰉍" },
+    { name = "Música",     text = "󱍙" },
+    { name = "Vídeos",     text = "󰈫" },
+    { name = "Público",    text = "󰉖" },
+    { name = "Proyectos",  text = "󰲋" },
+    { name = "Local-IA",   text = "󰚩" },
+    { name = "Devlab",     text = "󰆍" },
+]
