@@ -1125,8 +1125,10 @@
     {
       "actions": [
         {
-          "args": {},
-          "id": "audio.volume-up",
+          "args": {
+            "command": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+"
+          },
+          "id": "command.run",
           "layouts": []
         }
       ],
@@ -1142,8 +1144,10 @@
     {
       "actions": [
         {
-          "args": {},
-          "id": "audio.volume-down",
+          "args": {
+            "command": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%-"
+          },
+          "id": "command.run",
           "layouts": []
         }
       ],

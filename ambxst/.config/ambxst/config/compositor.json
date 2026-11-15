@@ -33,7 +33,7 @@
   "blurExplicitIgnoreAlpha": false,
   "blurIgnoreAlphaValue": 0.2,
   "blurNewOptimizations": true,
-  "blurXray": false,
+  "blurXray": true,
   "blurNoise": 0,
   "blurContrast": 1,
   "blurBrightness": 1,

@@ -30,7 +30,10 @@ cfetch() {
     local visual_offset=12
     local total_content_width=$((logo_width + gap + text_width))
 
-    local -a logos=("$HOME"/.config/fastfetch/media/*.png)
+    local -a logos=(
+	"$HOME"/.config/fastfetch/media/*.png
+	"$HOME"/.config/fastfetch/media/*.jpg
+	)
     if [ ! -e "${logos[0]}" ]; then
         fastfetch
         return

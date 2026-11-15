@@ -1,6 +1,6 @@
 {
-  "enabled": false,
-  "theme": "default",
+  "enabled": true,
+  "theme": "floating",
   "position": "bottom",
   "height": 48,
   "iconSize": 24,

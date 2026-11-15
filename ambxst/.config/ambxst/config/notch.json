@@ -1,9 +1,9 @@
 {
   "theme": "default",
   "position": "top",
-  "hoverRegionHeight": 8,
+  "hoverRegionHeight": 16,
   "keepHidden": false,
   "noMediaDisplay": "userHost",
   "customText": "Ambxst",
-  "disableHoverExpansion": false
+  "disableHoverExpansion": true
 }
