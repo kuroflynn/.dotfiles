@@ -24,41 +24,61 @@ fi
 cfetch() {
     command -v fastfetch >/dev/null 2>&1 || return
 
-    local logo_width=38
-    local text_width=45
-    local gap=2
-    local visual_offset=12
-    local total_content_width=$((logo_width + gap + text_width))
+    local term_width
+    term_width=$(tput cols 2>/dev/null || printf '120')
 
-    local -a logos=(
-	"$HOME"/.config/fastfetch/media/*.png
-	"$HOME"/.config/fastfetch/media/*.jpg
-	)
-    if [ ! -e "${logos[0]}" ]; then
-        fastfetch
+    local text_width=63
+    local logo_width=38
+    local gap=5
+    local margin=2
+
+    # Adaptar la ilustración al espacio disponible
+    local available=$((term_width - text_width - gap - margin * 2))
+
+    if (( available < logo_width )); then
+        logo_width=$available
+        gap=3
+    fi
+
+    # Evitar tamaños inválidos en ventanas muy pequeñas
+    if (( logo_width < 10 )); then
+        fastfetch --logo-type none
+        return
+    fi
+
+    local logo_height=$((logo_width / 2))
+
+    # Calcular el centrado horizontal
+    local total_width=$((logo_width + gap + text_width))
+    local padding=$(((term_width - total_width) / 2))
+
+    (( padding < 0 )) && padding=0
+
+    # Seleccionar una ilustración aleatoria
+    local -a logos=()
+    local file
+
+    for file in "$HOME"/.config/fastfetch/media/*.{png,jpg}; do
+        [[ -f "$file" ]] && logos+=("$file")
+    done
+
+    if (( ${#logos[@]} == 0 )); then
+        fastfetch --logo-type none
         return
     fi
 
     local logo_path
     logo_path=$(shuf -e "${logos[@]}" -n 1)
 
-    local term_width
-    term_width=$(tput cols 2>/dev/null || printf '120')
-
-    local padding=$((((term_width - total_content_width) / 2) - visual_offset))
-    if [ "$padding" -lt 0 ]; then
-        padding=0
-    fi
-
     fastfetch \
         --logo "$logo_path" \
         --logo-type kitty \
         --logo-width "$logo_width" \
-        --logo-height 19 \
+        --logo-height "$logo_height" \
         --logo-padding-top 3 \
+        --logo-padding-right "$gap" \
         --logo-padding-left "$padding"
 }
-
 cfetch
 
 # Wrapper de shell para Yazi
@@ -116,7 +136,7 @@ ltd() {
 }
 
 # Disco de Windows
-alias winmount='sudo mount -t ntfs-3g /dev/nvme1n1p3 /mnt/windows'
+alias winmount='sudo mount -t ntfs-3g UUID=2E8006678006363D /mnt/windows'
 alias winumount='sudo umount /mnt/windows'
 
 # Mantenimiento del sistema en Arch
